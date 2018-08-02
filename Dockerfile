@@ -22,7 +22,7 @@ RUN \
 COPY conf/ conf/
 
 # Copy all plugins
-COPY target/flume/plugins.d .
+COPY target/flume/ .
 
 RUN apk update && apk add bash && rm -rf /var/cache/apk/*
 
