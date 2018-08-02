@@ -159,7 +159,7 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
                }
                catch ( Exception e) {
                    LOG.info(e.getMessage());
-                   LOG.info("Could not send data to ES, I will retry");
+                   LOG.info("发送到ES失败, 即将重试");
                    txn.rollback();
                    status = Status.BACKOFF;
                    sinkCounter.incrementConnectionFailedCount();
@@ -187,37 +187,18 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
     }
 
     private String ExtractEvent(Event event) {
+        LOG.debug("准备解析数据");
         Map<String, String> headers = event.getHeaders();
-        Iterator it = headers.entrySet().iterator();
-        JsonObject logline = new JsonObject();
-        //extra(headers,logline);
         String body = new String(event.getBody());
-        final Grok grok = grokCompiler.compile("%{COMBINEDAPACHELOG}");
+        Grok grok = grokCompiler.compile("%{COMBINEDAPACHELOG}");
         Match gm = grok.match(body);
         final Map<String, Object> capture = gm.capture();
         capture.putAll(headers);
         String json = gson.toJson(capture);
 
-        logline.addProperty("message", body.toString());
+        LOG.debug("解析json数据成功："+json);
         return json;
 			
-    }
-
-    private void extra(Map<String,String> map, JsonObject jsonObject){
-        Iterator it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String key = (String) entry.getKey();//Dragos said so
-            String value = (String)entry.getValue();
-            try{
-                jsonObject.add(key, parser.parse(value));
-            }
-            catch (Exception e) {
-                //After all this is not valid json, but I will send it anyway
-                jsonObject.addProperty(key, value);
-            }
-
-        }
     }
 
 }
