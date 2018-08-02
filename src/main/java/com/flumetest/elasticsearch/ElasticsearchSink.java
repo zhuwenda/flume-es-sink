@@ -9,6 +9,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.*;
+import io.krakens.grok.api.Grok;
+import io.krakens.grok.api.GrokCompiler;
+import io.krakens.grok.api.Match;
 import org.apache.commons.lang.StringUtils;
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
@@ -29,10 +33,6 @@ import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 
 public class ElasticsearchSink extends AbstractSink implements Configurable {
     private static final Logger LOG = Logger.getLogger(ElasticsearchSink.class);
@@ -44,6 +44,16 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
     private SinkCounter sinkCounter;
     private RestClient restClient;
     private JsonParser parser;
+
+    private GrokCompiler grokCompiler;
+    private Gson gson;
+
+    private ElasticsearchSink(){
+        GrokCompiler grokCompiler = GrokCompiler.newInstance();
+        grokCompiler.registerDefaultPatterns();
+        this.grokCompiler = grokCompiler;
+        this.gson = new GsonBuilder().create();
+    }
     
     @Override
     public void configure(Context context) {
@@ -180,23 +190,34 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
         Map<String, String> headers = event.getHeaders();
         Iterator it = headers.entrySet().iterator();
         JsonObject logline = new JsonObject();
+        //extra(headers,logline);
+        String body = new String(event.getBody());
+        final Grok grok = grokCompiler.compile("%{COMBINEDAPACHELOG}");
+        Match gm = grok.match(body);
+        final Map<String, Object> capture = gm.capture();
+        capture.putAll(headers);
+        String json = gson.toJson(capture);
+
+        logline.addProperty("message", body.toString());
+        return json;
+			
+    }
+
+    private void extra(Map<String,String> map, JsonObject jsonObject){
+        Iterator it = map.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            String key = (String) entry.getKey();//Dragos said so 
+            String key = (String) entry.getKey();//Dragos said so
             String value = (String)entry.getValue();
-	    	try{
-                 logline.add(key, parser.parse(value));
+            try{
+                jsonObject.add(key, parser.parse(value));
             }
             catch (Exception e) {
-            //After all this is not valid json, but I will send it anyway
-                 logline.addProperty(key, value);
+                //After all this is not valid json, but I will send it anyway
+                jsonObject.addProperty(key, value);
             }
-            
+
         }
-        String body = new String(event.getBody());
-        logline.addProperty("message", body.toString());
-        return logline.toString();
-			
     }
 
 }

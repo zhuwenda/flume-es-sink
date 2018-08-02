@@ -11,6 +11,9 @@ The sink should be compatible with all elasticsearch versions, it has been teste
 
 可直接以docker方式运行，也可将编译出来的后插件（`target/flume/plugins.d`)，放置到flume插件中运行，运行flume
 
+系统引入了grok，使用方法请见测试类，其中，pattern可参考一下链接
+https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns
+
 安装
 --
 
