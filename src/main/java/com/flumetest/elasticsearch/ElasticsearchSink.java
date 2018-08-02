@@ -48,7 +48,7 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
     private GrokCompiler grokCompiler;
     private Gson gson;
 
-    private ElasticsearchSink(){
+    public ElasticsearchSink(){
         GrokCompiler grokCompiler = GrokCompiler.newInstance();
         grokCompiler.registerDefaultPatterns();
         this.grokCompiler = grokCompiler;
