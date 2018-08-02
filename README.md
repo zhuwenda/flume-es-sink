@@ -32,4 +32,6 @@ Add the sink to the flume configuration as follows:
 
 运行
 --
+`docker run -it flume`
 
+or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console flume`

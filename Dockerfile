@@ -16,9 +16,7 @@ WORKDIR /opt/flume
 ADD http://archive.apache.org/dist/flume/$FLUME_VERSION/apache-flume-$FLUME_VERSION-bin.tar.gz  /tmp
 RUN \
   tar --strip-components 1 -xzf /tmp/apache-flume-$FLUME_VERSION-bin.tar.gz && \
-  rm -f /tmp/apache-flume-$FLUME_VERSION-bin.tar.gz && \
-  rm -f lib/httpcore* && \
-  rm -f lib/httpclient*
+  rm -f /tmp/apache-flume-$FLUME_VERSION-bin.tar.gz
 
 # Copy configuration files
 COPY conf/ conf/
@@ -26,7 +24,7 @@ COPY conf/ conf/
 # Copy all plugins
 COPY target/flume/plugins.d .
 
-RUN apk update && apk add bash./ && rm -rf /var/cache/apk/*
+RUN apk update && apk add bash && rm -rf /var/cache/apk/*
 
 # Create flume user and switch to it
 RUN adduser flume -h /opt/flume -s /bin/false -D flume
