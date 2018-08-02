@@ -153,8 +153,7 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
                    sinkCounter.incrementBatchCompleteCount();
                }
                catch ( Exception e) {
-                   LOG.info(e.getMessage());
-                   LOG.info("发送到ES失败, 即将重试");
+                   LOG.info("发送到ES失败, 即将重试",e);
                    txn.rollback();
                    status = Status.BACKOFF;
                    sinkCounter.incrementConnectionFailedCount();
