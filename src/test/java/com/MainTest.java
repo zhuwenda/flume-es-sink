@@ -9,6 +9,7 @@ import org.apache.flume.Channel;
 import org.apache.flume.Event;
 import org.apache.flume.Sink;
 import org.apache.flume.Transaction;
+import org.apache.flume.event.SimpleEvent;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -16,6 +17,7 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainTest {
@@ -67,6 +69,5 @@ public class MainTest {
         String json = new GsonBuilder().create().toJson(capture);
         System.out.println(json);
     }
-
 
 }

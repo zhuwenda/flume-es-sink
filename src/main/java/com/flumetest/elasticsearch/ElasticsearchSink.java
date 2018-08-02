@@ -2,12 +2,7 @@ package com.flumetest.elasticsearch;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.google.gson.*;
 import io.krakens.grok.api.Grok;
@@ -193,11 +188,14 @@ public class ElasticsearchSink extends AbstractSink implements Configurable {
         Grok grok = grokCompiler.compile("%{COMBINEDAPACHELOG}");
         Match gm = grok.match(body);
         final Map<String, Object> capture = gm.capture();
-        capture.putAll(headers);
-        String json = gson.toJson(capture);
 
+        Map<String,Object> jsonMap = new HashMap<>();
+        jsonMap.putAll(headers);
+        jsonMap.putAll(capture);
+        String json = gson.toJson(jsonMap);
         LOG.debug("解析json数据成功："+json);
         return json;
+
 			
     }
 
