@@ -15,38 +15,72 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
                         <configuration>
-
-
-
-                            <!--指定outputDirectory-->
-                            <outputDirectory>${project.build.directory}/flume/plugins.d/${project.artifactId}-${project.version}/libext</outputDirectory>
-
-
-                            <!--
-                                <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
-                                Alternatively use ${project.build.directory}/classes/lib as OutputDirectory to integrate all jar-files into the main jar, but then you will need to add custom classloading code to load the jars.
-                                -->
-
-                            <includeScope>runtime</includeScope>
-
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.http</pattern>
+                                    <shadedPattern>hidden.org.apache.http</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.logging</pattern>
+                                    <shadedPattern>hidden.org.apache.logging</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons.codec</pattern>
+                                    <shadedPattern>hidden.org.apache.commons.codec</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons.logging</pattern>
+                                    <shadedPattern>hidden.org.apache.commons.logging</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-dependency-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>copy-dependencies</id>-->
+                        <!--<phase>prepare-package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>copy-dependencies</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+
+
+
+                            <!--&lt;!&ndash;指定outputDirectory&ndash;&gt;-->
+                            <!--<outputDirectory>${project.build.directory}/flume/plugins.d/${project.artifactId}-${project.version}/libext</outputDirectory>-->
+
+
+                            <!--&lt;!&ndash;-->
+                                <!--<outputDirectory>${project.build.directory}/classes/lib</outputDirectory>-->
+                                <!--Alternatively use ${project.build.directory}/classes/lib as OutputDirectory to integrate all jar-files into the main jar, but then you will need to add custom classloading code to load the jars.-->
+                                <!--&ndash;&gt;-->
+
+                            <!--<includeScope>runtime</includeScope>-->
+
+                            <!--<overWriteReleases>false</overWriteReleases>-->
+                            <!--<overWriteSnapshots>false</overWriteSnapshots>-->
+                            <!--<overWriteIfNewer>true</overWriteIfNewer>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -60,8 +94,8 @@
     <dependencies>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
-            <artifactId>rest</artifactId>
-            <version>5.5.3</version>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>6.3.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

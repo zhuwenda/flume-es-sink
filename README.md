@@ -35,6 +35,6 @@ Add the sink to the flume configuration as follows:
 
 运行
 --
-`docker run -it flume`
+`docker run -it -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-es-sink`
 
-or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console flume`
+or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-es-sink`

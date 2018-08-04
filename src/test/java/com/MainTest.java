@@ -5,20 +5,22 @@ import com.google.gson.JsonObject;
 import io.krakens.grok.api.Grok;
 import io.krakens.grok.api.GrokCompiler;
 import io.krakens.grok.api.Match;
+import org.apache.commons.lang.StringUtils;
 import org.apache.flume.Channel;
 import org.apache.flume.Event;
 import org.apache.flume.Sink;
 import org.apache.flume.Transaction;
 import org.apache.flume.event.SimpleEvent;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MainTest {
 
@@ -68,6 +70,25 @@ public class MainTest {
         System.out.println("json data:");
         String json = new GsonBuilder().create().toJson(capture);
         System.out.println(json);
+    }
+
+    @Test
+    public void testConnection() throws Exception{
+
+        String hosts_configured = "efk2.zhuwenda.com:9200";
+        List<String> es_hosts=Arrays.asList(hosts_configured.split(","));
+        List<HttpHost> hosts = new ArrayList<>(es_hosts.size());
+        for (String hostslist: es_hosts) {
+            String hostname = hostslist.split(":")[0];
+            int port = Integer.parseInt(hostslist.split(":")[1]);
+            System.out.println("Connecting to "+hostname+":"+port);
+            hosts.add(new HttpHost(hostname,port,"http"));
+        }
+        RestClientBuilder builder = RestClient.builder(hosts.toArray(new HttpHost[hosts.size()]));
+
+        RestClient restClient = builder.build();
+
+        System.out.println(restClient);
     }
 
 }
