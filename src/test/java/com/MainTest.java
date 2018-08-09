@@ -19,8 +19,13 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.junit.Test;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.regex.Pattern;
 
 public class MainTest {
 
@@ -89,6 +94,17 @@ public class MainTest {
         RestClient restClient = builder.build();
 
         System.out.println(restClient);
+    }
+
+    @Test
+    public void testStream() throws Exception{
+
+        boolean s = Pattern.compile("^\\d{4}\\-\\d{1,2}\\-\\d{1,2}.*").matcher("2018-08-07 06:01:02 xxl-job-admin [com.xxl.job.admin.core.util.MailU")
+                .matches();
+        System.out.println(s);
+
+
+
     }
 
 }

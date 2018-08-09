@@ -25,7 +25,7 @@ Build the jar and add it alongside with the dependencies in the flume lib direct
 Add the sink to the flume configuration as follows:
 ```
         ....
-        agent.sinks.es.type = com.flumetest.elasticsearch.ElasticsearchSink
+        agent.sinks.es.type = com.legion.flume.sink.ElasticsearchSink
         agent.sinks.es.hosts = host1:port1,host2:port2
         agent.sinks.es.indexName = test
         agent.sinks.es.indexType = bar_type
@@ -38,3 +38,5 @@ Add the sink to the flume configuration as follows:
 `docker run -it -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-es-sink`
 
 or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-es-sink`
+
+or `docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent-test.properties:/opt/flume/conf/agent.properties --name test --rm -v $(pwd)/morphline.conf:/etc/flume-ng/conf/morphline.conf -v $(pwd)/t.log:/opt/flume/t.log zhuwenda/flume-es-sink`

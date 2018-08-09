@@ -12,23 +12,29 @@ ENV OPTIONS ""
 
 WORKDIR /opt/flume
 
+
+#RUN apk update && apk add bash && rm -rf /var/cache/apk/*
+RUN apk add bash && rm -rf /var/cache/apk/*
+
 # Install flume
 #ADD http://archive.apache.org/dist/flume/$FLUME_VERSION/apache-flume-$FLUME_VERSION-bin.tar.gz  /tmp
 #RUN \
 #  tar --strip-components 1 -xzf /tmp/apache-flume-$FLUME_VERSION-bin.tar.gz && \
 #  rm -f /tmp/apache-flume-$FLUME_VERSION-bin.tar.gz
 
-COPY apache-flume-1.8.0-bin.tar.gz ./
+COPY docker-data/apache-flume-1.8.0-bin.tar.gz ./
 RUN tar --strip-components 1 -xzf apache-flume-1.8.0-bin.tar.gz
 
+
 # Copy configuration files
-COPY conf/ conf/
+COPY docker-data/conf/ ./conf/
+
+# Copy grok resource
+COPY docker-data/grok-dictionaries/ ./grok-dictionaries/
 
 # Copy all plugins
 COPY target/flume/ .
 
-#RUN apk update && apk add bash && rm -rf /var/cache/apk/*
-RUN apk add bash && rm -rf /var/cache/apk/*
 
 # Create flume user and switch to it
 RUN adduser flume -h /opt/flume -s /bin/false -D flume

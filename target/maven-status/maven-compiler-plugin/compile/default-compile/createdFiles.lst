@@ -1,1 +1,4 @@
-com/flumetest/elasticsearch/ElasticsearchSink.class
+com/legion/flume/sink/ElasticsearchSink.class
+com/legion/flume/interceptor/MultiLineInterceptor$Builder.class
+com/legion/flume/interceptor/MultiLineInterceptor.class
+com/legion/flume/interceptor/MultiLineInterceptor$What.class

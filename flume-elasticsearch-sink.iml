@@ -22,9 +22,9 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.flume:flume-ng-sdk:1.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.flume:flume-ng-configuration:1.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.flume:flume-ng-auth:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:11.0.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.findbugs:jsr305:1.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:11.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:1.3.9" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" level="project" />
@@ -51,5 +51,9 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.kitesdk:kite-morphlines-core:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe:config:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.codahale.metrics:metrics-core:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.codahale.metrics:metrics-healthchecks:3.0.2" level="project" />
   </component>
 </module>

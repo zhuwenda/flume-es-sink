@@ -1,0 +1,1 @@
+NGINX  %{COMBINEDAPACHELOG} %{QS:x_forwarded_for}
