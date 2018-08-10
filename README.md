@@ -39,4 +39,4 @@ Add the sink to the flume configuration as follows:
 
 or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-with-morphline`
 
-or `docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent-test.properties:/opt/flume/conf/agent.properties --name test --rm -v $(pwd)/morphline.conf:/etc/flume-ng/conf/morphline.conf -v $(pwd)/t.log:/opt/flume/t.log zhuwenda/flume-with-morphline`
+or `docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent-test.properties:/opt/flume/conf/agent.properties --name test --rm -v $(pwd)/morphline.conf:/opt/flume/morphline.conf -v $(pwd)/t.log:/opt/flume/t.log zhuwenda/flume-with-morphline`
