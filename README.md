@@ -35,8 +35,8 @@ Add the sink to the flume configuration as follows:
 
 运行
 --
-`docker run -it -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-es-sink`
+`docker run -it -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-with-morphline`
 
-or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-es-sink`
+or debug logger:`docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent.properties:/opt/flume/conf/agent.properties zhuwenda/flume-with-morphline`
 
-or `docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent-test.properties:/opt/flume/conf/agent.properties --name test --rm -v $(pwd)/morphline.conf:/etc/flume-ng/conf/morphline.conf -v $(pwd)/t.log:/opt/flume/t.log zhuwenda/flume-es-sink`
+or `docker run -it -e OPTIONS=-Dflume.root.logger=DEBUG,console -v $(pwd)/agent-test.properties:/opt/flume/conf/agent.properties --name test --rm -v $(pwd)/morphline.conf:/etc/flume-ng/conf/morphline.conf -v $(pwd)/t.log:/opt/flume/t.log zhuwenda/flume-with-morphline`

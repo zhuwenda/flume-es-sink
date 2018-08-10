@@ -26,9 +26,6 @@ COPY docker-data/apache-flume-1.8.0-bin.tar.gz ./
 RUN tar --strip-components 1 -xzf apache-flume-1.8.0-bin.tar.gz
 
 
-# Copy configuration files
-COPY docker-data/conf/ ./conf/
-
 # Copy grok resource
 COPY docker-data/grok-dictionaries/ ./grok-dictionaries/
 
