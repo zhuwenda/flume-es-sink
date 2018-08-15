@@ -1,18 +1,16 @@
-# FlumeElasticsearchRestSink
-Flume elasticsearch REST sink
+# Flume With Morphline
+Flume With Morphline
 =============================
 
 简介
 --
 
-This is a simple Elasticsearch flume sink based on the official java rest client by elastic.co https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html
-
-The sink should be compatible with all elasticsearch versions, it has been tested with elasticsearch 6.0.0
+集成了morphline、elasticsearch rest sink
 
 可直接以docker方式运行，也可将编译出来的后插件（`target/flume/plugins.d`)，放置到flume插件中运行，运行flume
 
-系统引入了grok，使用方法请见测试类，其中，pattern可参考一下链接
-https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns
+`http://kitesdk.org/docs/current/morphlines/morphlines-reference-guide.html`
+`http://kitesdk.org/docs/current/morphlines/index.html`
 
 安装
 --
