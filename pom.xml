@@ -123,7 +123,26 @@
         <dependency>
             <groupId>org.kitesdk</groupId>
             <artifactId>kite-morphlines-core</artifactId>
-            <version>1.0.0</version> <!-- or whatever the latest version is -->
+            <version>1.1.0</version> <!-- or whatever the latest version is -->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.kitesdk/kite-morphlines-useragent -->
+        <dependency>
+            <groupId>org.kitesdk</groupId>
+            <artifactId>kite-morphlines-useragent</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.kitesdk/kite-morphlines-maxmind -->
+        <dependency>
+            <groupId>org.kitesdk</groupId>
+            <artifactId>kite-morphlines-maxmind</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kitesdk</groupId>
+            <artifactId>kite-morphlines-json</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+
     </dependencies>
 </project>

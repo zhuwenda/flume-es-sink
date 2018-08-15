@@ -26,8 +26,9 @@ COPY docker-data/apache-flume-1.8.0-bin.tar.gz ./
 RUN tar --strip-components 1 -xzf apache-flume-1.8.0-bin.tar.gz
 
 
-# Copy grok resource
+# Copy resource
 COPY docker-data/grok-dictionaries/ ./grok-dictionaries/
+COPY docker-data/GeoLite2-City_20180807/ ./GeoLite2-City/
 
 # Copy all plugins
 COPY target/flume/ .
